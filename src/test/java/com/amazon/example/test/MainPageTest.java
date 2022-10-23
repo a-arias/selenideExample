@@ -4,8 +4,11 @@ import com.amazon.example.pageObjects.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.closeWindow;
 
 public class MainPageTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
@@ -15,12 +18,18 @@ public class MainPageTest {
     cartSideBarPage cartMenu = new cartSideBarPage();
     cartPage userCart = new cartPage();
 
-    @BeforeAll
-    public static void setUpAll() {
+    @BeforeEach
+    public  void setUpAll() {
         Configuration.browserSize = "2000x1100";
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://www.amazon.in";
     }
+
+    @AfterEach
+    public  void tearDown() {
+        closeWindow();
+    }
+
     @Test
     public void searchProductUsingSideMenu(){
         dashboard.open();
@@ -32,7 +41,7 @@ public class MainPageTest {
 
         dashboard.openSortByMenu()
                 .sortBy("Price: High to Low")
-                .clickProductFromList("3")
+                .clickProductFromFilterSearch("3")
                 .switchToNewWindow();
 
         productDetailsPage.productTitle().shouldHave(text("QLED TV"));
@@ -41,17 +50,23 @@ public class MainPageTest {
         productDetailsPage.buyNowButton().shouldBe(visible);
 
     }
+
     @Test
     public void addItemToWishList(){
         dashboard.open();
 
-        dashboard.searchByText("TV");
+        dashboard.searchByText("Samsung TV");
 
+//        menu.clickCheckboxButton("Top Brands");
+//
         dashboard.openSortByMenu()
-                .sortBy("Price: High to Low")
-                .clickProductFromList("5");
+                 .sortBy("Price: High to Low");
+
+        dashboard.clickProductFromTypeSearch("5")
+                        .switchToNewWindow();
 
         productDetailsPage.clickAddToWishListButton();
+
         signInPage.signInHeader().shouldHave(text("Sign In"));
     }
 
@@ -59,11 +74,11 @@ public class MainPageTest {
     public void addProductToCart(){
         dashboard.open();
 
-        dashboard.searchByText("TV");
+        dashboard.searchByText("Samsung TV");
 
-        dashboard.openSortByMenu()
-                .sortBy("Price: High to Low")
-                .clickProductFromList("5");
+        dashboard.clickProductFromTypeSearch("5")
+                .switchToNewWindow();
+
 
         productDetailsPage.clickAddToCartButton();
 
@@ -75,11 +90,11 @@ public class MainPageTest {
     public void userCanAddProductToCart(){
         dashboard.open();
 
-        dashboard.searchByText("TV");
+        dashboard.searchByText("Samsung TV");
 
-        dashboard.openSortByMenu()
-                .sortBy("Price: High to Low")
-                .clickProductFromList("5");
+        dashboard.clickProductFromTypeSearch("5")
+                .switchToNewWindow();
+
 
         String currentProductTitle = productDetailsPage.getCurrentProductTitle();
 
