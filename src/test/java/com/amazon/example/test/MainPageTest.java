@@ -52,18 +52,31 @@ public class MainPageTest {
     }
 
     @Test
+    public void searchProductWithSearchBar(){
+        dashboard.open();
+
+        dashboard.searchByText("Samsung TV");
+
+        dashboard.clickProductFromTypeSearch("5")
+                .switchToNewWindow();
+
+        productDetailsPage.productTitle().shouldHave(text("TV"));
+        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+        productDetailsPage.addToCartButton().shouldBe(visible);
+        productDetailsPage.buyNowButton().shouldBe(visible);
+    }
+
+    @Test
     public void addItemToWishList(){
         dashboard.open();
 
         dashboard.searchByText("Samsung TV");
 
-//        menu.clickCheckboxButton("Top Brands");
-//
         dashboard.openSortByMenu()
                  .sortBy("Price: High to Low");
 
         dashboard.clickProductFromTypeSearch("5")
-                        .switchToNewWindow();
+                 .switchToNewWindow();
 
         productDetailsPage.clickAddToWishListButton();
 
@@ -77,7 +90,7 @@ public class MainPageTest {
         dashboard.searchByText("Samsung TV");
 
         dashboard.clickProductFromTypeSearch("5")
-                .switchToNewWindow();
+                 .switchToNewWindow();
 
 
         productDetailsPage.clickAddToCartButton();
@@ -85,28 +98,4 @@ public class MainPageTest {
         cartMenu.proceedToCheckoutButton().shouldBe(visible);
         cartMenu.goToCartButton().shouldBe(visible);
     }
-
-    @Test
-    public void userCanAddProductToCart(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("5")
-                .switchToNewWindow();
-
-
-        String currentProductTitle = productDetailsPage.getCurrentProductTitle();
-
-        productDetailsPage.clickAddToCartButton();
-
-        cartMenu.clickGoToCartButton();
-
-        userCart.clickProductFromList("1");
-
-        Assertions.assertEquals(currentProductTitle, productDetailsPage.getCurrentProductTitle());
-    }
-
-
-
 }

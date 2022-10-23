@@ -11,14 +11,14 @@ public class cartPage extends basePage {
         return $(By.cssSelector("[data-item-index="+"'"+index+"'"+"]"));
     }
 
-//    public cartPage clickProductFromList(String index) {
-//        resultsElement(index).shouldBe(visible).click();
-//        return this;
-//    }
-
     public cartPage clickProductFromList(String index) {
-         $(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal'][index]"));
-         return this;
-
+        resultsElement(index).shouldBe(visible).click();
+        return this;
     }
+
+//    public cartPage clickProductFromList(String index) {
+//         $(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal'][index]"));
+//         return this;
+//
+//    }
 }
