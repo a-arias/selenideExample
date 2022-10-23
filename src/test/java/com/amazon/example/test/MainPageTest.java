@@ -12,6 +12,8 @@ public class MainPageTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
     hamburgerMenu menu = new hamburgerMenu();
     productDetailsPage productDetailsPage = new productDetailsPage();
+    signInPage signInPage = new signInPage();
+
 
 
     @BeforeAll
@@ -54,5 +56,21 @@ public class MainPageTest {
         productDetailsPage.buyNowButton().shouldBe(visible);
 
     }
+
+    @Test
+    public void addItemToWishList(){
+        dashboard.open();
+
+        dashboard.searchByText("TV");
+
+        dashboard.openSortByMenu()
+                .sortBy("Price: High to Low")
+                .clickProductFromList("5");
+
+        productDetailsPage.clickAddToWishListButton();
+        signInPage.signInHeader().shouldHave(text("Sign In"));
+    }
+
+
 
 }
