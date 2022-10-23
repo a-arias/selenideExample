@@ -14,6 +14,7 @@ public class MainPageTest {
     productDetailsPage productDetailsPage = new productDetailsPage();
     signInPage signInPage = new signInPage();
     cartSideBarPage cartMenu = new cartSideBarPage();
+    cartPage userCart = new cartPage();
 
     @BeforeAll
     public static void setUpAll() {
@@ -83,6 +84,27 @@ public class MainPageTest {
 
         cartMenu.proceedToCheckoutButton().shouldBe(visible);
         cartMenu.goToCartButton().shouldBe(visible);
+    }
+
+    @Test
+    public void userCanAddProductToCart(){
+        dashboard.open();
+
+        dashboard.searchByText("TV");
+
+        dashboard.openSortByMenu()
+                .sortBy("Price: High to Low")
+                .clickProductFromList("5");
+
+        String currentProductTitle = productDetailsPage.getCurrentProductTitle();
+
+        productDetailsPage.clickAddToCartButton();
+
+        cartMenu.clickGoToCartButton();
+
+        userCart.clickProductFromList("1");
+
+        Assertions.assertEquals(currentProductTitle, productDetailsPage.getCurrentProductTitle());
     }
 
 
