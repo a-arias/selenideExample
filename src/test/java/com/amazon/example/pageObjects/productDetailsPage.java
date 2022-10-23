@@ -44,7 +44,4 @@ public class productDetailsPage extends basePage {
         return ProductTitle().getText();
     }
 
-
-}
-
 }
