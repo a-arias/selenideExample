@@ -13,13 +13,11 @@ public class MainPageTest {
     hamburgerMenu menu = new hamburgerMenu();
     productDetailsPage productDetailsPage = new productDetailsPage();
     signInPage signInPage = new signInPage();
-
-
+    cartSideBarPage cartMenu = new cartSideBarPage();
 
     @BeforeAll
     public static void setUpAll() {
         Configuration.browserSize = "1280x800";
-        SelenideLogger.addListener("allure", new AllureSelenide());
         Configuration.browser = "Chrome";
         Configuration.headless = false;
         Configuration.baseUrl = "https://www.amazon.in";
@@ -69,6 +67,22 @@ public class MainPageTest {
 
         productDetailsPage.clickAddToWishListButton();
         signInPage.signInHeader().shouldHave(text("Sign In"));
+    }
+
+    @Test
+    public void addProductToCart(){
+        dashboard.open();
+
+        dashboard.searchByText("TV");
+
+        dashboard.openSortByMenu()
+                .sortBy("Price: High to Low")
+                .clickProductFromList("5");
+
+        productDetailsPage.clickAddToCartButton();
+
+        cartMenu.proceedToCheckoutButton().shouldBe(visible);
+        cartMenu.goToCartButton().shouldBe(visible);
     }
 
 
