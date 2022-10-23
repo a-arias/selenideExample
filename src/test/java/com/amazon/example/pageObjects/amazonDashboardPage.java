@@ -16,7 +16,7 @@ public class amazonDashboardPage extends basePage {
     }
     public SelenideElement dropdownMenuItem(String criteria) {return $(By.xpath("//li/a[(text()="+"'"+criteria+"'"+")]"));}
     public SelenideElement resultsElementFromFilter(String index) {return $(By.xpath("//*[@data-index="+"'"+index+"'"+"]"));}
-    public SelenideElement resultsElementFromTypeSearch(String index) {return $(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal'][index]"));}
+    public SelenideElement resultsElementFromTypeSearch(String index) {return $(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal']["+"'"+index+"'"+"]"));}
     public SelenideElement searchInput() {
         return $(By.id("twotabsearchtextbox"));
     }
@@ -51,7 +51,7 @@ public class amazonDashboardPage extends basePage {
     }
 
     //Clicks a product from a filtered search by user.
-    //this is used for when user finds products using the hamburguer menu.
+    //this is used for when user finds products using the hamburger menu.
     public amazonDashboardPage clickProductFromFilterSearch(String index) {
         resultsElementFromFilter(index).shouldBe(visible).click();
         return this;

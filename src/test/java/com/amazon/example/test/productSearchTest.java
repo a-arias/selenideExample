@@ -52,7 +52,7 @@ public class productSearchTest {
 
         dashboard.searchByText("Samsung TV");
 
-        dashboard.clickProductFromTypeSearch("5")
+        dashboard.clickProductFromTypeSearch("1")
                 .switchToNewWindow();
 
         productDetailsPage.productTitle().shouldHave(text("TV"));
@@ -70,7 +70,7 @@ public class productSearchTest {
         dashboard.openSortByMenu()
                  .sortBy("Price: High to Low");
 
-        dashboard.clickProductFromTypeSearch("5")
+        dashboard.clickProductFromTypeSearch("1")
                  .switchToNewWindow();
 
         productDetailsPage.clickAddToWishListButton();
@@ -84,7 +84,7 @@ public class productSearchTest {
 
         dashboard.searchByText("Samsung TV");
 
-        dashboard.clickProductFromTypeSearch("5")
+        dashboard.clickProductFromTypeSearch("1")
                  .switchToNewWindow();
 
 

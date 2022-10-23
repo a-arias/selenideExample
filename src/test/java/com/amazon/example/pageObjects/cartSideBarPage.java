@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class cartSideBarPage extends basePage {
     //###Locators
-    public SelenideElement goToCartButton() {return $(By.cssSelector("input[type='submit']"));}
+    public SelenideElement goToCartButton() {return $(By.id("attach-sidesheet-view-cart-button-announce"));}
     public SelenideElement proceedToCheckoutButton() {return $(By.id("attach-sidesheet-checkout-button-announce"));}
 
     //###class methods
