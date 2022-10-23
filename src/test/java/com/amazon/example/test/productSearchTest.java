@@ -40,6 +40,7 @@ public class productSearchTest {
                 .clickProductFromFilterSearch("3")
                 .switchToNewWindow();
 
+        //Asserts productTitle contains 'TV' text and aboutThisItemHeader text is displayed.
         productDetailsPage.productTitle().shouldHave(text("QLED"));
         productDetailsPage.aboutThisItemHeader().shouldBe(visible);
     }
@@ -53,6 +54,7 @@ public class productSearchTest {
         dashboard.clickProductFromTypeSearch("3")
                 .switchToNewWindow();
 
+        //Asserts productTitle contains 'TV' text and aboutThisItemHeader text is displayed.
         productDetailsPage.productTitle().shouldHave(text("TV"));
         productDetailsPage.aboutThisItemHeader().shouldBe(visible);
     }
@@ -68,6 +70,7 @@ public class productSearchTest {
 
         productDetailsPage.clickAddToWishListButton();
 
+        //Asserts SignIn Header page displayed.
         signInPage.signInHeader().shouldHave(text("Sign In"));
     }
 
@@ -82,6 +85,7 @@ public class productSearchTest {
 
         productDetailsPage.clickAddToCartButton();
 
+        //Asserts proceedToCheckoutButton and goToCartButton are displayed.
         cartMenu.proceedToCheckoutButton().shouldBe(visible);
         cartMenu.goToCartButton().shouldBe(visible);
     }
