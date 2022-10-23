@@ -15,14 +15,11 @@ public class amazonDashboardPage extends basePage {
         return $(By.id("a-autoid-0-announce"));
     }
     public SelenideElement dropdownMenuItem(String criteria) {return $(By.xpath("//li/a[(text()="+"'"+criteria+"'"+")]"));}
-    public SelenideElement resultsElementFromFilter(String index) {return $(By.xpath("//*[@data-index="+"'"+index+"'"+"]"));}
-    public SelenideElement resultsElementFromTypeSearch(String index) {return $(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal']["+"'"+index+"'"+"]"));}
-    public SelenideElement searchInput() {
-        return $(By.id("twotabsearchtextbox"));
-    }
-    public SelenideElement searchButton() {
-        return $(By.id("nav-search-submit-button"));
-    }
+    public SelenideElement resultsElementFromFilter(String index) {return $(By.xpath("//a/span[@class='a-size-base-plus a-color-base a-text-normal']["+"'"+index+"'"+"]"));}
+    public SelenideElement resultsElementFromTypeSearch(String index) {return $(By.xpath("//a/span[@class='a-size-medium a-color-base a-text-normal']["+"'"+index+"'"+"]"));}
+    public SelenideElement cartHeaderButton() {return $(By.id("nav-cart-text-container"));}
+    public SelenideElement searchInput() {return $(By.id("twotabsearchtextbox"));}
+    public SelenideElement searchButton() {return $(By.id("nav-search-submit-button"));}
 
 
     //#########Complex methods
@@ -31,6 +28,12 @@ public class amazonDashboardPage extends basePage {
         Selenide.open("/");
         return this;
     }
+
+    public amazonDashboardPage clickHeaderCartButton() {
+        cartHeaderButton().click();
+        return this;
+    }
+
 
     //Perform a search with given string.
     public amazonDashboardPage searchByText(String product) {

@@ -6,7 +6,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class cartPage extends basePage {
     //#########Locators
-    public SelenideElement resultsElement(String index) {return $(By.cssSelector("[data-item-index="+"'"+index+"'"+"]"));}
+    public SelenideElement resultsElement(String index) {return $(By.xpath("//a/span[@class='a-size-medium a-color-base a-text-normal']["+"'"+index+"'"+"]"));}
+
 
     //#########Class methods
     //Clicks product from list

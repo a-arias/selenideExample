@@ -1,6 +1,7 @@
 package com.amazon.example.test;
 import com.amazon.example.pageObjects.*;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.closeWindow;
@@ -39,11 +40,8 @@ public class productSearchTest {
                 .clickProductFromFilterSearch("3")
                 .switchToNewWindow();
 
-        productDetailsPage.productTitle().shouldHave(text("QLED TV"));
+        productDetailsPage.productTitle().shouldHave(text("QLED"));
         productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-        productDetailsPage.addToCartButton().shouldBe(visible);
-        productDetailsPage.buyNowButton().shouldBe(visible);
-
     }
 
     @Test
@@ -52,13 +50,11 @@ public class productSearchTest {
 
         dashboard.searchByText("Samsung TV");
 
-        dashboard.clickProductFromTypeSearch("1")
+        dashboard.clickProductFromTypeSearch("3")
                 .switchToNewWindow();
 
         productDetailsPage.productTitle().shouldHave(text("TV"));
         productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-        productDetailsPage.addToCartButton().shouldBe(visible);
-        productDetailsPage.buyNowButton().shouldBe(visible);
     }
 
     @Test
@@ -70,7 +66,7 @@ public class productSearchTest {
         dashboard.openSortByMenu()
                  .sortBy("Price: High to Low");
 
-        dashboard.clickProductFromTypeSearch("1")
+        dashboard.clickProductFromTypeSearch("3")
                  .switchToNewWindow();
 
         productDetailsPage.clickAddToWishListButton();
@@ -84,7 +80,7 @@ public class productSearchTest {
 
         dashboard.searchByText("Samsung TV");
 
-        dashboard.clickProductFromTypeSearch("1")
+        dashboard.clickProductFromTypeSearch("3")
                  .switchToNewWindow();
 
 
@@ -92,5 +88,29 @@ public class productSearchTest {
 
         cartMenu.proceedToCheckoutButton().shouldBe(visible);
         cartMenu.goToCartButton().shouldBe(visible);
+    }
+
+    @Test
+    public void userCanAddProductToCart(){
+        dashboard.open();
+
+        dashboard.searchByText("Samsung TV");
+
+        dashboard.clickProductFromTypeSearch("3")
+                .switchToNewWindow();
+
+        String currentProductTitle = productDetailsPage.getCurrentProductTitle();
+
+        productDetailsPage.clickAddToCartButton();
+        cartMenu.proceedToCheckoutButton().shouldBe(visible);
+        cartMenu.goToCartButton().shouldBe(visible);
+        cartMenu.clickCloseCartMenu();
+
+
+        dashboard.clickHeaderCartButton();
+
+        userCart.clickProductFromList("1");
+
+        Assertions.assertEquals(currentProductTitle, productDetailsPage.getCurrentProductTitle());
     }
 }
