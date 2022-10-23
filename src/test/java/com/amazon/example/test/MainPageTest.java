@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Condition.*;
 public class MainPageTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
     hamburgerMenu menu = new hamburgerMenu();
+    productDetailsPage productDetailsPage = new productDetailsPage();
+
 
     @BeforeAll
     public static void setUpAll() {
@@ -28,6 +30,11 @@ public class MainPageTest {
                 .clickMenuLink("TV, Appliances, Electronics")
                 .clickSubsectionMenuLink("Televisions")
                 .clickCheckboxButton("Samsung");
+
+        productDetailsPage.productTitle().shouldHave(text("QLED TV"));
+        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+        productDetailsPage.addToCartButton().shouldBe(visible);
+        productDetailsPage.buyNowButton().shouldBe(visible);
 
     }
 
