@@ -38,4 +38,21 @@ public class MainPageTest {
 
     }
 
+    @Test
+    public void searchProductUsingSearchBar(){
+        dashboard.open();
+
+        dashboard.searchByText("TV");
+
+        dashboard.openSortByMenu()
+                .sortBy("Price: High to Low")
+                .clickProductFromList("5");
+
+        productDetailsPage.productTitle().shouldHave(text("TV"));
+        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+        productDetailsPage.addToCartButton().shouldBe(visible);
+        productDetailsPage.buyNowButton().shouldBe(visible);
+
+    }
+
 }
