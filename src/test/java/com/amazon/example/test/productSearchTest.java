@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.closeWindow;
 
-public class MainPageTest {
+public class productSearchTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
     hamburgerMenu menu = new hamburgerMenu();
     productDetailsPage productDetailsPage = new productDetailsPage();
