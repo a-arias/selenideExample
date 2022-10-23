@@ -5,6 +5,8 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class amazonDashboardPage extends basePage {
@@ -13,11 +15,11 @@ public class amazonDashboardPage extends basePage {
     public SelenideElement dropdownMenu() {
         return $(By.id("a-autoid-0-announce"));
     }
-    public SelenideElement dropdownMenuItem(String criteria) {
-        return $(By.xpath("//li/a[(text()="+"'"+criteria+"'"+")]"));
-    }
+    public SelenideElement dropdownMenuItem(String criteria) {return $(By.xpath("//li/a[(text()="+"'"+criteria+"'"+")]"));}
     public SelenideElement resultsElement(String index) {
-        return $(By.cssSelector("[data-index="+"'"+index+"'"+"]"));
+        //return $(By.xpath("//div[@data-index="+"'"+index+"'"+" and @data-component-type='s-search-result']"));
+        return $(By.xpath("//*[@data-index="+"'"+index+"'"+"]"));
+
     }
 
     public SelenideElement searchInput() {
@@ -53,7 +55,7 @@ public class amazonDashboardPage extends basePage {
     }
 
     public amazonDashboardPage clickProductFromList(String index) {
-        resultsElement(index).shouldBe(Condition.visible).scrollIntoView(true).click();
+        resultsElement(index).click();
         return this;
     }
 

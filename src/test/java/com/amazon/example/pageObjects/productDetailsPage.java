@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class productDetailsPage extends basePage {
@@ -13,30 +14,30 @@ public class productDetailsPage extends basePage {
         return Selenide.$(By.xpath("//h1[contains(text(),'About this item')]"));
     }
     public SelenideElement productTitle() {
-        return Selenide.$(By.id("productTitle"));
+        return $(By.id("productTitle"));
     }
     public SelenideElement addToCartButton() {
-        return Selenide.$(By.id("add-to-cart-button"));
+        return $(By.id("add-to-cart-button"));
     }
     public SelenideElement buyNowButton() {
-        return Selenide.$(By.id("buy-now-button"));
+        return $(By.id("buy-now-button"));
     }
 
     public SelenideElement addToWishListButton() {
-        return Selenide.$(By.id("wishListMainButton"));
+        return $(By.id("wishListMainButton"));
     }
 
     public SelenideElement ProductTitle() {
-        return Selenide.$(By.id("productTitle"));
+        return $(By.id("productTitle"));
     }
 
     public productDetailsPage clickAddToWishListButton() {
-        addToWishListButton().shouldBe(Condition.visible).click();
+        addToWishListButton().shouldBe(visible).click();
         return this;
     }
 
     public productDetailsPage clickAddToCartButton() {
-        addToCartButton().shouldBe(Condition.visible).click();
+        addToCartButton().shouldBe(visible).click();
         return this;
     }
 
