@@ -26,69 +26,65 @@ public class productSearchTest {
         closeWindow();
     }
 
-//    @Test
-//    public void searchProductUsingSideMenu(){
-//        dashboard.open();
-//
-//        menu.openHamburgerMenu()
-//                .clickMenuLink("TV, Appliances, Electronics")
-//                .clickSubsectionMenuLink("Televisions")
-//                .clickCheckboxButton("Samsung");
-//
-//        dashboard.openSortByMenu()
-//                .sortBy("Price: High to Low")
-//                .clickProductFromFilterSearch("3")
-//                .switchToNewWindow();
-//
-//        productDetailsPage.productTitle().shouldHave(text("QLED"));
-//        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-//    }
-//
-//    @Test
-//    public void searchProductWithSearchBar(){
-//        dashboard.open();
-//
-//        dashboard.searchByText("Samsung TV");
-//
-//        dashboard.clickProductFromTypeSearch("3")
-//                .switchToNewWindow();
-//
-//        productDetailsPage.productTitle().shouldHave(text("TV"));
-//        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-//    }
-//
-//    @Test
-//    public void addItemToWishList(){
-//        dashboard.open();
-//
-//        dashboard.searchByText("Samsung TV");
-//
-//        dashboard.openSortByMenu()
-//                 .sortBy("Price: High to Low");
-//
-//        dashboard.clickProductFromTypeSearch("3")
-//                 .switchToNewWindow();
-//
-//        productDetailsPage.clickAddToWishListButton();
-//
-//        signInPage.signInHeader().shouldHave(text("Sign In"));
-//    }
-//
-//    @Test
-//    public void addProductToCart(){
-//        dashboard.open();
-//
-//        dashboard.searchByText("Samsung TV");
-//
-//        dashboard.clickProductFromTypeSearch("3")
-//                 .switchToNewWindow();
-//
-//
-//        productDetailsPage.clickAddToCartButton();
-//
-//        cartMenu.proceedToCheckoutButton().shouldBe(visible);
-//        cartMenu.goToCartButton().shouldBe(visible);
-//    }
+    @Test
+    public void searchProductUsingSideMenu(){
+        dashboard.open();
+
+        menu.openHamburgerMenu()
+                .clickMenuLink("TV, Appliances, Electronics")
+                .clickSubsectionMenuLink("Televisions")
+                .clickCheckboxButton("Samsung");
+
+        dashboard.openSortByMenu()
+                .sortBy("Price: High to Low")
+                .clickProductFromFilterSearch("3")
+                .switchToNewWindow();
+
+        productDetailsPage.productTitle().shouldHave(text("QLED"));
+        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+    }
+
+    @Test
+    public void searchProductWithSearchBar(){
+        dashboard.open();
+
+        dashboard.searchByText("Samsung TV");
+
+        dashboard.clickProductFromTypeSearch("3")
+                .switchToNewWindow();
+
+        productDetailsPage.productTitle().shouldHave(text("TV"));
+        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+    }
+
+    @Test
+    public void addItemToWishList(){
+        dashboard.open();
+
+        dashboard.searchByText("Samsung TV");
+
+        dashboard.clickProductFromTypeSearch("3")
+                 .switchToNewWindow();
+
+        productDetailsPage.clickAddToWishListButton();
+
+        signInPage.signInHeader().shouldHave(text("Sign In"));
+    }
+
+    @Test
+    public void addProductToCart(){
+        dashboard.open();
+
+        dashboard.searchByText("Samsung TV");
+
+        dashboard.clickProductFromTypeSearch("3")
+                 .switchToNewWindow();
+
+        productDetailsPage.clickAddToCartButton();
+
+        cartMenu.proceedToCheckoutButton().shouldBe(visible);
+        cartMenu.goToCartButton().shouldBe(visible);
+    }
 
     @Test
     public void userCanAddProductToCart(){
