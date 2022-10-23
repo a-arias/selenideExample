@@ -1,13 +1,8 @@
 package com.amazon.example.test;
 import com.amazon.example.pageObjects.*;
-
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.closeWindow;
 
 public class MainPageTest {
