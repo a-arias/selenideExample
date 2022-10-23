@@ -18,9 +18,7 @@ public class productDetailsPage extends basePage {
         return $(By.id("buy-now-button"));
     }
     public SelenideElement addToWishListButton() {return $(By.id("wishListMainButton"));}
-    public SelenideElement ProductTitle() {
-        return $(By.id("productTitle"));
-    }
+    public SelenideElement ProductTitle() {return $(By.cssSelector("span#productTitle"));}
 
     //###class methods
     //Clicks the add to wish list button on product details page.
@@ -37,7 +35,7 @@ public class productDetailsPage extends basePage {
 
     //get current product title.
     public String getCurrentProductTitle() {
-        return ProductTitle().getText();
+        return ProductTitle().shouldBe(visible).getText();
     }
 
 }

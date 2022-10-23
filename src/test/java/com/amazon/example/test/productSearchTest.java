@@ -26,91 +26,96 @@ public class productSearchTest {
         closeWindow();
     }
 
-    @Test
-    public void searchProductUsingSideMenu(){
-        dashboard.open();
-
-        menu.openHamburgerMenu()
-                .clickMenuLink("TV, Appliances, Electronics")
-                .clickSubsectionMenuLink("Televisions")
-                .clickCheckboxButton("Samsung");
-
-        dashboard.openSortByMenu()
-                .sortBy("Price: High to Low")
-                .clickProductFromFilterSearch("3")
-                .switchToNewWindow();
-
-        productDetailsPage.productTitle().shouldHave(text("QLED"));
-        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-    }
-
-    @Test
-    public void searchProductWithSearchBar(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("3")
-                .switchToNewWindow();
-
-        productDetailsPage.productTitle().shouldHave(text("TV"));
-        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-    }
-
-    @Test
-    public void addItemToWishList(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.openSortByMenu()
-                 .sortBy("Price: High to Low");
-
-        dashboard.clickProductFromTypeSearch("3")
-                 .switchToNewWindow();
-
-        productDetailsPage.clickAddToWishListButton();
-
-        signInPage.signInHeader().shouldHave(text("Sign In"));
-    }
-
-    @Test
-    public void addProductToCart(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("3")
-                 .switchToNewWindow();
-
-
-        productDetailsPage.clickAddToCartButton();
-
-        cartMenu.proceedToCheckoutButton().shouldBe(visible);
-        cartMenu.goToCartButton().shouldBe(visible);
-    }
+//    @Test
+//    public void searchProductUsingSideMenu(){
+//        dashboard.open();
+//
+//        menu.openHamburgerMenu()
+//                .clickMenuLink("TV, Appliances, Electronics")
+//                .clickSubsectionMenuLink("Televisions")
+//                .clickCheckboxButton("Samsung");
+//
+//        dashboard.openSortByMenu()
+//                .sortBy("Price: High to Low")
+//                .clickProductFromFilterSearch("3")
+//                .switchToNewWindow();
+//
+//        productDetailsPage.productTitle().shouldHave(text("QLED"));
+//        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+//    }
+//
+//    @Test
+//    public void searchProductWithSearchBar(){
+//        dashboard.open();
+//
+//        dashboard.searchByText("Samsung TV");
+//
+//        dashboard.clickProductFromTypeSearch("3")
+//                .switchToNewWindow();
+//
+//        productDetailsPage.productTitle().shouldHave(text("TV"));
+//        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
+//    }
+//
+//    @Test
+//    public void addItemToWishList(){
+//        dashboard.open();
+//
+//        dashboard.searchByText("Samsung TV");
+//
+//        dashboard.openSortByMenu()
+//                 .sortBy("Price: High to Low");
+//
+//        dashboard.clickProductFromTypeSearch("3")
+//                 .switchToNewWindow();
+//
+//        productDetailsPage.clickAddToWishListButton();
+//
+//        signInPage.signInHeader().shouldHave(text("Sign In"));
+//    }
+//
+//    @Test
+//    public void addProductToCart(){
+//        dashboard.open();
+//
+//        dashboard.searchByText("Samsung TV");
+//
+//        dashboard.clickProductFromTypeSearch("3")
+//                 .switchToNewWindow();
+//
+//
+//        productDetailsPage.clickAddToCartButton();
+//
+//        cartMenu.proceedToCheckoutButton().shouldBe(visible);
+//        cartMenu.goToCartButton().shouldBe(visible);
+//    }
 
     @Test
     public void userCanAddProductToCart(){
         dashboard.open();
 
-        dashboard.searchByText("Samsung TV");
+        dashboard.searchByText("Toshiba TV");
 
-        dashboard.clickProductFromTypeSearch("3")
+        dashboard.clickProductFromTypeSearch("5")
                 .switchToNewWindow();
 
-        String currentProductTitle = productDetailsPage.getCurrentProductTitle();
+        String productTitleFromSearch = productDetailsPage.getCurrentProductTitle();
 
+        //User adds product to cart.
         productDetailsPage.clickAddToCartButton();
+        //Validates cart buttons are displayed.
         cartMenu.proceedToCheckoutButton().shouldBe(visible);
         cartMenu.goToCartButton().shouldBe(visible);
+        //closes cart menu.
         cartMenu.clickCloseCartMenu();
 
-
+        //Navigates to Cart button using cart header button.
         dashboard.clickHeaderCartButton();
+        //Clicks product from cart list.
 
-        userCart.clickProductFromList("1");
+        String productNameFromCartList = userCart.productFromListWithName(productTitleFromSearch).getText();
 
-        Assertions.assertEquals(currentProductTitle, productDetailsPage.getCurrentProductTitle());
+        //Asserts product title from first search is equals to the product on the cart List
+        Assertions.assertEquals(productTitleFromSearch,productNameFromCartList);
     }
 }
