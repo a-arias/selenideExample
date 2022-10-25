@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class amazonDashboardPage extends basePage {
@@ -56,14 +55,14 @@ public class amazonDashboardPage extends basePage {
     //Clicks a product from a filtered search by user.
     //this is used for when user finds products using the hamburger menu.
     public amazonDashboardPage clickProductFromFilterSearch(String index) {
-        resultsElementFromFilter(index).shouldBe(visible).click();
+        resultsElementFromFilter(index).shouldBe(Condition.visible).click();
         return this;
     }
 
     //Clicks a product from a type search by user.
     //this is used for when user finds products using the search input.
     public amazonDashboardPage clickProductFromTypeSearch(String index) {
-        resultsElementFromTypeSearch(index).shouldBe(visible).click();
+        resultsElementFromTypeSearch(index).shouldBe(Condition.visible).click();
         return this;
     }
 

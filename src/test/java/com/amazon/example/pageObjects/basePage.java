@@ -8,5 +8,4 @@ public class basePage {
         Selenide.switchTo().window(1);
         return this;
     }
-
 }
