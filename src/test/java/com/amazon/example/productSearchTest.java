@@ -1,11 +1,18 @@
 package com.amazon.example;
 import com.amazon.example.pageObjects.*;
+import com.codeborne.selenide.junit5.TextReportExtension;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+
+
 import org.junit.jupiter.api.*;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.closeWindow;
 import com.amazon.dataProvider.getEnvConf;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(TextReportExtension.class)
 public class productSearchTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
     hamburgerMenu menu = new hamburgerMenu();
@@ -18,6 +25,11 @@ public class productSearchTest {
     public static void startDriver(){
         getEnvConf driverConfiguration = new getEnvConf();
         driverConfiguration.getEnvironmentConfiguration();
+    }
+
+    @BeforeEach
+    public void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     }
 
     @AfterEach
@@ -44,77 +56,4 @@ public class productSearchTest {
         productDetailsPage.aboutThisItemHeader().shouldBe(visible);
     }
 
-    @Test
-    public void searchProductWithSearchBar(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("3")
-                .switchToNewWindow();
-
-        //Asserts productTitle contains 'TV' text and aboutThisItemHeader text is displayed.
-        productDetailsPage.productTitle().shouldHave(text("TV"));
-        productDetailsPage.aboutThisItemHeader().shouldBe(visible);
-    }
-
-    @Test
-    public void addItemToWishList(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("3")
-                 .switchToNewWindow();
-
-        productDetailsPage.clickAddToWishListButton();
-
-        //Asserts SignIn Header page displayed.
-        signInPage.signInHeader().shouldHave(text("Sign In"));
-    }
-
-    @Test
-    public void addProductToCart(){
-        dashboard.open();
-
-        dashboard.searchByText("Samsung TV");
-
-        dashboard.clickProductFromTypeSearch("3")
-                 .switchToNewWindow();
-
-        productDetailsPage.clickAddToCartButton();
-
-        //Asserts proceedToCheckoutButton and goToCartButton are displayed.
-        cartMenu.proceedToCheckoutButton().shouldBe(visible);
-        cartMenu.goToCartButton().shouldBe(visible);
-    }
-
-    @Test
-    public void userCanAddProductToCart(){
-        dashboard.open();
-
-        dashboard.searchByText("Toshiba TV");
-
-        dashboard.clickProductFromTypeSearch("5")
-                .switchToNewWindow();
-
-        String productTitleFromSearch = productDetailsPage.getCurrentProductTitle();
-
-        //User adds product to cart.
-        productDetailsPage.clickAddToCartButton();
-        //Validates cart buttons are displayed.
-        cartMenu.proceedToCheckoutButton().shouldBe(visible);
-        cartMenu.goToCartButton().shouldBe(visible);
-        //closes cart menu.
-        cartMenu.clickCloseCartMenu();
-
-        //Navigates to Cart button using cart header button.
-        dashboard.clickHeaderCartButton();
-        //Clicks product from cart list.
-
-        String productNameFromCartList = userCart.productFromListWithName(productTitleFromSearch).getText();
-
-        //Asserts product title from first search is equals to the product on the cart List
-        Assertions.assertEquals(productTitleFromSearch,productNameFromCartList);
-    }
 }

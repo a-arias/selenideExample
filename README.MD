@@ -11,6 +11,11 @@ $ cd selenideExample
 ```
 $ mvn clean test
 ```
+## See Allure Report
+```
+$ mvn io.qameta.allure:allure-maven:serve
+```
+
 ## How to run this project on selenoid?
 You need to have installed docker on your machine, you can follow steps on 
 Windows: https://docs.docker.com/desktop/install/windows-install/ and 
