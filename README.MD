@@ -19,7 +19,7 @@ Linux: https://docs.docker.com/engine/install/ubuntu/
 ### Setting up Docker containers
 
 ```
-$sudo docker pull selenoid/vnc:chrome_99.0
+$sudo docker pull selenoid/vnc:chrome_65.0
 $sudo docker pull aerokube/selenoid
 $sudo docker pull aerokube/selenoid-ui
 $sudo docker pull selenoid/video-recorder
