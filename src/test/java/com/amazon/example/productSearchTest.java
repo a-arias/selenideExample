@@ -1,18 +1,10 @@
 package com.amazon.example;
 import com.amazon.example.pageObjects.*;
-
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.chrome.ChromeOptions;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.closeWindow;
-
-import com.amazon.dataProvider.ConfigFileReader;
 import com.amazon.dataProvider.getEnvConf;
-
-
 
 public class productSearchTest {
     amazonDashboardPage dashboard = new amazonDashboardPage();
@@ -21,7 +13,6 @@ public class productSearchTest {
     com.amazon.example.pageObjects.signInPage signInPage = new signInPage();
     cartSideBarPage cartMenu = new cartSideBarPage();
     cartPage userCart = new cartPage();
-
 
     @BeforeAll
     public static void startDriver(){
